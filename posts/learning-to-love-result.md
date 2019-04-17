@@ -93,17 +93,62 @@ enum PasswordError: Error {
     case strictlyNumeric
     case noUppercaseLetters
     case noLowerCaseLetters
+
+    var failureMessage: String {
+        switch self {
+            case .lessThanTenCharacters:
+                return "Password must contain ten characters or more."
+            case .noNumericCharacters:
+                return "Password must contain numeric characters."
+            case .strictlyNumeric:
+                return "Password must contain both upper and lowercase characters."
+            case .noUppercaseLetters:
+                return "Password must contain upper case characters."
+            case .noLowerCaseLetters:
+                return "Password must contain lower case characters."
+        }
+    }
 }
 ```
 
 OK! Now that thats out of the way lets revisit what our password checking function would look like now that it returns a result with meaningful failure information.
+
+``` swift
+func register(password: String) -> Result<String, PasswordError> {
+
+    if password.count < 10 {
+        return .failure(.lessThanTenCharacters)
+    }
+
+    if !password.contains(where: { ("0"..."9").contains($0)}) {
+        return .failure(.noNumericCharacters)
+    }
+
+    let noLowerCaseCharacters = !password.contains(where: { ("a"..."z").contains($0) })
+    let noUpperCaseCharacters = !password.contains(where: { ("A"..."Z").contains($0) })
+
+    if noLowerCaseCharacters && noUpperCaseCharacters {
+        return .failure(.strictlyNumeric)
+    }
+
+    if noLowerCaseCharacters {
+        return .failure(.noLowerCaseLetters)
+    }
+
+    if noUpperCaseCharacters {
+        return .failure(.noUppercaseLetters)
+    }
+
+    return .success("Password Registered!")
+}
+```
 
 Now calling our function would produce the following output:
 
 ``` swift
 
 // Numeric Password
-register(password: "8675309999999") // .strictlyNumeric
+register(password: "8675309999999") // .failure(.strictlyNumeric)
 
 // No numbers
 register(password: "superduperpassword") // .noNumericCharacters
@@ -112,3 +157,18 @@ register(password: "superduperpassword") // .noNumericCharacters
 register(password: "Swiftdud3") // .lessThanTenCharacters
 
 ```
+
+And finally we can get around to writing our error handling code a little bit more elegantly clearly separating the logic for success or failure and now there is no chance of "superposition" or being both success and failure or some other undefined state where they are both `nil`:
+
+``` swift
+switch result {
+case .success(let message):
+    handleSuccess(with: message)
+case .failure(let failure):
+    retry(with: failure.message)
+}
+```
+
+## Further Reading
+
+There are many other great mini-tutorials out there that will pop up in your search results but in addition to reading those I highly suggest you take a look at the Swift Evolution Proposal [SE-235: Add result](https://github.com/apple/swift-evolution/blob/master/proposals/0235-add-result.md)
