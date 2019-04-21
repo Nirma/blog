@@ -158,7 +158,9 @@ register(password: "Swiftdud3") // .lessThanTenCharacters
 
 ```
 
-And finally we can get around to writing our error handling code a little bit more elegantly clearly separating the logic for success or failure and now there is no chance of "superposition" or being both success and failure or some other undefined state where they are both `nil`:
+And finally we can get around to writing our error handling code a little more concise and clearly.
+
+Writing the logic to be either success or failure and now there is no chance of "superposition" or some other undefined state where they are both `nil`:
 
 ``` swift
 switch result {
@@ -169,6 +171,89 @@ case .failure(let failure):
 }
 ```
 
+# Features of the Result type
+
+Result has a constructor to create a Result from throwing code, if the method throws then the
+Result has two methods for Transforming values:  `map` and `flatMap` and two methods for transforming errors: 'mapError' and
+
+
+## Replacing code that `throw`s
+One handy feature of Result is it's ability to wrap code that throws errors.
+This has a few benefits but one obvious one is that instead of catching the error and dealing with it right away, the output of `Result` can be saved and if its an error it can be dealt with at a more oppertune time.
+
+Many error handling examples deal with network code so I will try to be less cliche and use an example of dealing with exceptions that arise from parsing, namely `Codable` failing to decode JSON.
+
+``` swift
+struct CardboardBox: Codable {
+    let brand: String
+    let width: Double
+    let height: Double
+    let depth: Double
+    let flavor: String?
+}
+```
+
+Given the above `CardboardBox` structure it could be initialized with the following valid JSON:
+
+``` swift
+let validBoxJSON = """
+{
+    "flavor": "Musty with undertones of cherry and an aftertaste of wet river rock, NOT dry river rock.",
+    "brand": "Nick's Fancy Boxes",
+    "width": 5,
+    "height": 5,
+    "depth": 5
+}
+"""
+
+do {
+    let box = try JSONDecoder().decode(CardboardBox.self, from: validBoxJSON.data(using: .utf8)!)
+    print(box.brand)
+} catch {
+    print("There was an error parsing the JSON")
+}
+```
+
+Thats quite a bit of code just to handle one possible exception, more than that we are forced to handle the event of an error in the `catch` block at the moment an exception is thrown.
+
+I personally find this lacking but fortunately there is good news: `Result` has an initializer that takes a closure that throws exceptions and automatically wraps it in a handy Result type.
+
+The example below has intentionally misformed JSON to demonstrate error handling with the `Result` type.
+The property "flavor" should be a `String` but here we use an Integer (42, the answer to the meaning of life.)
+This will cause JSONDecoder to fail.
+
+``` swift
+let inValidBoxJSON = """
+{
+"flavor": 42,
+"brand": "The Best Brand",
+"width": 5,
+"height": 5,
+"depth": 5
+}
+"""
+
+if let data = inValidBoxJSON.data(using: .utf8) {
+    let myBoxResult = Result {
+        try JSONDecoder().decode(CardboardBox.self, from: data)
+    }
+
+    switch myBoxResult {
+    case .success(let box):
+        print(" -- My box --\n\n \(box)")
+    case .failure(let failure):
+        print(failure.localizedDescription)
+    }
+}
+```
+
+We use `Result`'s closure constructor to wrap the throwing code and now we can deal with the end result in a very readable switch statement.
+One of the big benefits of this approach is that the result is saved and stored away for later in `myBoxResult`, it can be dealt with when it is convenient for the programmer which is very important for dealing with asynchronous code.
+
+## 
+
 ## Further Reading
 
 There are many other great mini-tutorials out there that will pop up in your search results but in addition to reading those I highly suggest you take a look at the Swift Evolution Proposal [SE-235: Add result](https://github.com/apple/swift-evolution/blob/master/proposals/0235-add-result.md)
+
+Happy Trails! 🤠
