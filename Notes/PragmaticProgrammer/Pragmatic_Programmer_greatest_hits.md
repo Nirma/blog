@@ -13,7 +13,7 @@ According to [wikipedia](https://en.wikipedia.org/wiki/Broken_windows_theory):
 ### Whats it have to do with development?
 
 According to the theory written above a building with just one broken window has a higher probability of
-being further vandalized than a building without a broken window.
+being further vandalized when compared to a building without a broken window.
 Chaos gives way to more chaos but on the flip side when people see order they tend to feel that breaking the order would be bad.
 
 A code base with a few ‘broken windows’ (i.e sloppy patches, workarounds and other ‘temporary’ code that accidentally becomes part of the core) will encourage continued bad behavior by people who make changes to the code base.
@@ -110,7 +110,7 @@ Tools that can read or even the documentation of a custom binary file format may
 lost or the documentation of the last format version could potentially have never been updated and if just one bit is shifted the entire file is unreadable. Non-Plain text formats require that EVERY DETAIL is know of the file format in order to parse it.
 Plain text like ASCII or UTF-8 on the other hand can be edited and read in plain text almost future proofing the file format.
 
-Even if the file is in a plain text format there is still a major point to cosider.
+Even if the file is in a plain text format there is still a major point to consider.
 
  - Human Readable does not guarantee Human Understandable
 
@@ -118,7 +118,7 @@ Just because one can read the characters does not mean someone can make out what
 
 ### Debugging
 
-#### Dont’ Panic (Think: Hitchhiker’s Guide to the Galaxy)
+#### Don't Panic (Think: Hitchhiker’s Guide to the Galaxy)
 Even if you are on a tight deadline and behind schedule and the bug looks like a major setback, just stay calm.
 Panic can and will cloud your judgement so do what you can get yourself relaxed and in a calm state of mind.
 Forget about what needs to be done by End of Day in addition to this bug fix, forget about how spending time fixing this bug will delay progress on ticket x.
@@ -128,7 +128,7 @@ Just focus on finding out what when wrong and what the fix might look like.
 #### Fix the problem, not the blame.
 
 It does not matter who accidentally introduced the bug, blame only wastes time and the author of the bug most likely is aware of their mistake.
-The bug is the entire teams problem, its everybody’s problem so just focus on the patch instead of pointing the finger.
+The bug is the entire team's problem, its everybody’s problem so just focus on the patch instead of pointing the finger.
 
 #### Interview the user and gain as much context as you can
 Most times a bug report does not contain enough context to properly reproduce the bug.
@@ -153,3 +153,66 @@ i.e Is the interest in reality a range of 0.6 ~ 1.3 percent but the function is 
 #### Binary Chop / Binary Search
 If you find yourself looking at a very long stack trace do the binary chop / binary search to find the offending call.
 Cut the stack in half and check the lower half, is the offending call in here? No? The move to the upper half, rinse and repeat.
+
+# Chapter 4
+
+## Design by Contract (DBC)
+
+- Powerful principal where the author of a function states very clearly what they can promise IFF they receive input matching a specific criteria.
+
+- As a trivial example when writing a square root function you could have the contract allow negative numbers and return imaginary solutions or you could be more strict and say only non-negative numbers are accepted and in return you promise a correct non-negative solution.
+
+### Components of DBC
+
+- Preconditions: What does the code require to be true of the input in order to provide a meaningful output?
+
+- Postconditions: What output is promised to the user? What state of the world is guaranteed at the end of the routine?
+
+- Class Invariants: This condition is always true from the perspective of the caller. What things are promised to remain constant when the function is entered and exited? In the middle of computation this invariant can change but by the time control returns to the caller of the function the invariant must hold true once again.
+
+
+# Chapter 5
+
+### Decoupling
+- Decoupled code is easier to change, harder to break.
+- Code reuse should not be a goal as much as the process of thinking that allows code to be reusable. Code reuse happens when interfaces are clearly defined and decoupled from the rest of the code.
+
+
+ ### Things to Avoid
+  - Train Wrecks: Avoid writing code that is a chain of function calls where any of the calls can easily change.
+  - Globalization creates large scale coupling of any components that depend on global variables or singletons.
+  - Inheritance: Subclassing is dangerous, use interfaces / protocols and mix-ins instead.
+
+  ### Don’t Chain Method calls
+  Unless the methods are very unlikely to change like `map`, `filter`, `reduce` chaining method
+  calls together is a ticking time bomb for maintenance.
+  Eventually someone is going to change one of those methods and it might not be as obvious to cause a compilation error.
+  Its entirely possible that the behavior of one or more of the methods being chained will change over time and when it does it will no longer behave in a way that methods being called down stream are expecting it to resulting in no warnings or errors from the compiler but undefined and strange program behavior.
+
+  ### The evils of Globalization
+
+ - Adding a global variable is as if every single function in your application gains an additional parameter but it is even worse than that! Unlike a parameter, a global variable is not visible in the function signature so even after removing the global it is difficult to quickly track down which code has been dependent on it.
+
+ - A change to a global requires a change to all the code through out the code base that relied on it.
+
+ ### Its important enough to be global, wrap it up!
+
+ Globalization is not only about using global variables, any data that is shared between modules is global be it a database, an API, Configuration etc.
+ This is not always a bad thing because there are sometimes not many alternatives but make sure that you wrap the global resource in some kind of code that can control access to it and that nothing is touching the global data directly.
+
+
+### Transforming Programming
+
+> If you can’t describe what you are doing as a process, you don’t know what you’re doing.
+> - W. Edwards Deming, (attr)
+> (David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 234). Pearson Education. Kindle Edition.
+
+A great mental tool for software design is to think of everything as a transformation.
+Break any process down into steps taking an input and then producing an output that becomes the input for the next function.
+Everything is just a sub task of the larger task of transforming input such as touches from the user into a desired result i.e a payment transaction.
+
+ - Don’t hoard state, pass it around. This pillar of functional programming leads to some amazingly stable code, every function in the pipeline gets a copy or reference of the data that is at the very least promised to be atomic.
+
+ - Model transformations with something similar to the `|>` pipe left operator where it is simple and easy to trace the input and output between functions in series. Even if the language you use does not support pipe-left like operators you can still clearly break the result of one operation between different lines passing it as a constant to the next.
+
+### ...TO BE CONTINUED
