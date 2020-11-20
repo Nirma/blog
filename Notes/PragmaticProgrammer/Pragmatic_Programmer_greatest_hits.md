@@ -158,17 +158,44 @@ Cut the stack in half and check the lower half, is the offending call in here? N
 
 ## Design by Contract (DBC)
 
+- Design by Contract defines the rights and responsibilities of a piece of software to ensure program correctness.
+- What is a correct program? One that does no more and no less than what it claims to do.
 - Powerful principal where the author of a function states very clearly what they can promise IFF they receive input matching a specific criteria.
-
 - As a trivial example when writing a square root function you could have the contract allow negative numbers and return imaginary solutions or you could be more strict and say only non-negative numbers are accepted and in return you promise a correct non-negative solution.
+- DBC forces you to think!
 
 ### Components of DBC
 
 - Preconditions: What does the code require to be true of the input in order to provide a meaningful output?
-
 - Postconditions: What output is promised to the user? What state of the world is guaranteed at the end of the routine?
-
 - Class Invariants: This condition is always true from the perspective of the caller. What things are promised to remain constant when the function is entered and exited? In the middle of computation this invariant can change but by the time control returns to the caller of the function the invariant must hold true once again.
+
+### DBC and TDD
+Design by Contract is still useful even if you do TDD because they are different approaches to program correctness.
+TDD is a good technique but to tends to make you focus on the "Happy Path" or the path where things go well and your tests may focus on that instead of what could go wrong like in the real world.
+
+- DBC defines the parameters for success and failure in all cases where as TDD can only target one case at a time.
+- TDD and other testing only gets triggered during a "test time" (maybe as part of continuous integration) during the build cycle but DBC and assertions are always active during design, development, deployment and most importantly maintenance.
+- DBC checks internal invariants whereas TDD only checks the code black-box style via its public interface.
+
+#### 'Err in favor of the consumer'
+Make sure to separate logic in code that are semantic invariants from logic that is subject to change via policy, think of semantic invariants as a philosophical contract.
+
+An example of a semantic invariant in a piece of software would be the simple principal that users will never be billed twice for the same transaction. This is something that will never change and should be clearly documented and enforced at all levels, bake this into the code with assertions and fail early before this horrible event happens.
+
+An example of a rule that must be enforced but is not a semantic invariant is something like the current sales tax rate or service fee.
+Management could decide tomorrow to raise the service fee from 10% to 12% on a whim or politicians can suddenly raise sales tax from 8% to 10% these things can happen in the real world but you will never expect the consumer to pay twice for a single transaction.
+
+### Assertive Programming: Dead programs tell no lines
+Crash yourself before you trash yourself!
+Once program state enters an "impossible" state anything the software does after that is not meaningful and can be quite harmful.
+Databases can be filled with junk data, customers can suddenly find mystery charges on their accounts and good data like the
+user's coveted files, game save data or bookmarks can be corrupted.
+
+- Instead of saying "This can never happen" write an assertion to check it.
+- Don't use Assertions in place of real error handling, a blog post should always have an associated author but a resource being inaccessible is possible under bad network conditions this is just simple error handling.
+- Be careful that your assertions do not create side effects, make sure that when observing that a condition is true that you do not change the state of the very thing you are observing.
+- Leave assertions on, especially in production. Just because the code you are shipping has no failing test today there is no guarantee that the tests have not tested a certain code path that will occur in the wild, in production.
 
 
 # Chapter 5
@@ -214,5 +241,19 @@ Everything is just a sub task of the larger task of transforming input such as t
  - Don’t hoard state, pass it around. This pillar of functional programming leads to some amazingly stable code, every function in the pipeline gets a copy or reference of the data that is at the very least promised to be atomic.
 
  - Model transformations with something similar to the `|>` pipe left operator where it is simple and easy to trace the input and output between functions in series. Even if the language you use does not support pipe-left like operators you can still clearly break the result of one operation between different lines passing it as a constant to the next.
+
+ ### Inheritance Tax
+  - Inheritance is coupling by definition.
+  - Inheritance introduces coupling on many levels.
+  - The sub class is not only coupled to the parent but the code that uses the subclass also tied to the parent class.
+
+ #### Alternatives to using Inheritance
+   - Protocols & Interfaces
+   - Delegation
+   - Mixins and Traits
+   - "Has A" is more important than is-a, does an object DO a certain thing vs what IS the object. This is true of both delegation and using protocols.
+
+
+
 
 ### ...TO BE CONTINUED
