@@ -241,6 +241,16 @@ Everything is just a sub task of the larger task of transforming input such as t
  - Don’t hoard state, pass it around. This pillar of functional programming leads to some amazingly stable code, every function in the pipeline gets a copy or reference of the data that is at the very least promised to be atomic.
 
  - Model transformations with something similar to the `|>` pipe left operator where it is simple and easy to trace the input and output between functions in series. Even if the language you use does not support pipe-left like operators you can still clearly break the result of one operation between different lines passing it as a constant to the next.
+ 
+ ### Pipes & Pipe-Lefts
+'pipe-left' operators use a very familier concept and is the same as the concept of pipes in a command line like `zsh` or `bash`.
+
+`wget -q -O -  https://raw.githubusercontent.com/Nirma/blog/master/Notes/PragmaticProgrammer/Pragmatic_Programmer_greatest_hits.md | grep -i software | wc -l`
+
+This has three stages: fetch the contents of **this** document and feed it into `stdin`; search for any lines contanting the word "software" ignoring case and finally pipe the input to `wc` and count the number of lines.
+The takeaway here is that each stage is only concerned with what its input and flags are and what it is required to output, this is a great example of separation of concerns and an example of how we can strive to build software that can be changed easily and sub-components that will stand the test of time. (for a little while.)
+
+
 
  ### Inheritance Tax
   - Inheritance is coupling by definition.
