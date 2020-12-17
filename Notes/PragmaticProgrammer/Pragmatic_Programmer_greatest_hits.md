@@ -289,6 +289,31 @@ learn concurrency models that deal with their specific platform but if you have 
     - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
     
   
-    
+ # Chapters 8 & 9 (There is a lot of overlap, it would be smoother to combine them here.)
+ 
+ ```
+ "I’ve never met a human being who would want to read 17,000 pages of documentation, and if there was, I’d kill him to get him out of the gene pool. Joseph Costello, President of Cadence"
+
+David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 392). Pearson Education. Kindle Edition. 
+```
+ 
+ ### Agile is not a noun, it is how you do things
+   - Agile is a method of responding to change and doing so frequently. 
+   - There is no "out of the box" solution that will work for any team.
+   - Anyone who claims to be able to sell you a "Solution" is a lier, the agile process needs to derived by the team.
+   - Saying "Other AAA tech companies do this" means nothing, if Netflix is currently doing agile via method "X" now when they are a company that has thousands of employees it does not mean that the current method would have worked for Netflix when they were only 50 employees and does not mean they will still be using the same method next year. 
+   - Agile solutions need to be custom tailored to how the team and company operate and don't forget its only about responding to change in near realtime not any particular dogma.
+   - One size fits no one well.
+   
+   ### After thoughts on testing
+     - State Coverage, not test coverage
+     - 
+   
+   
+  # Chapter 9 
+  
+  
+   
+   
 
 ### ...TO BE CONTINUED
