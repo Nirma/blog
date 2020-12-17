@@ -273,7 +273,22 @@ learn concurrency models that deal with their specific platform but if you have 
 # Chapter 7 
 
   ### Listen to your lizard brain
-    - Instincts make you feel, not think and when you 'feel' something it is most likely the result of accumulated experience. Listen to it, but think. 
-    - 
+    - Instincts make you feel, not think and when you 'feel' something it is most likely the result of accumulated experience. Listen to it, but think about what it means. 
+    - Distance yourself from a problem and come back to it again later if you feel that the approach is harder than it needs to be. Chances are you your insticts are right and after giving your subconscience sometime to push the problem through various layers of your brain you might come up with a simplier solution to the problem at hand. 
+    
+  ### Mind Hack
+  The book details a simple but powerful trick to get you past the black editor screen. 
+  When you feel "stuck" and don't know how to approach a difficult problem start writing "prototype" code i.e coding something that is only for the purpose 
+  of learning. This removes the distraction from the code having to be "right" and be done well and instead allows you to focus only on figuring out how to solve the problem with code. Once you have a working prototype or example of how to code something then you can think about how to make the code clear and simple and pretty. While making the prototype feel free to 
+  
+  ### Test your code, or your users will
+    - Tests should be the first users of your code. 
+    - Even if you do not write tests thinking of how to make the code you are writing testable has the benefit of making the software you are writing modular and keeps you off the path of writing large monolithic functions. 
+    - Unit tests are always the first line of defense, making sure that code contained in a module behaves as expected needs to be done and pass before testing code that relies on the module, fail fast, fail early. 
+    - 100% test coverage means nothing, just because every line of code is executed in the tests it does not mean all cases have been tested.
+    - Don't become a slave to TDD, TDD can help but also can be overdone and get in the way of software development.
+    
+  
+    
 
 ### ...TO BE CONTINUED
