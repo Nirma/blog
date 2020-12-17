@@ -286,7 +286,7 @@ learn concurrency models that deal with their specific platform but if you have 
     - Even if you do not write tests thinking of how to make the code you are writing testable has the benefit of making the software you are writing modular and keeps you off the path of writing large monolithic functions. 
     - Unit tests are always the first line of defense, making sure that code contained in a module behaves as expected needs to be done and pass before testing code that relies on the module, fail fast, fail early. 
     - 100% test coverage means nothing, just because every line of code is executed in the tests it does not mean all cases have been tested.
-    - Don't become a slave to TDD, TDD can help but also can be overdone and get in the way of software development.
+    - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
     
   
     
