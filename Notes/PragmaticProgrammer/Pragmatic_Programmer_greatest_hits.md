@@ -305,15 +305,11 @@ David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 392). Pearson Education
    - Agile solutions need to be custom tailored to how the team and company operate and don't forget its only about responding to change in near realtime not any particular dogma.
    - One size fits no one well.
    
-   ### After thoughts on testing
+   ### Afterthoughts on testing
      - State Coverage, not test coverage
-     - 
+     - Use propety based testing (i.e QuickCheck-ish testing libraries)
+     - Property based testing lets the computer generate random values and test that a certain property holds true.
+     - Property based testing is extremly economical, the alternative would be to write various tests to state by hand. 
+     
    
    
-  # Chapter 9 
-  
-  
-   
-   
-
-### ...TO BE CONTINUED
