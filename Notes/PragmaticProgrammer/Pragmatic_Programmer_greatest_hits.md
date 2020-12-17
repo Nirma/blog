@@ -264,6 +264,16 @@ The takeaway here is that each stage is only concerned with what its input and f
    - "Has A" is more important than is-a, does an object DO a certain thing vs what IS the object. This is true of both delegation and using protocols.
 
 
+# Chapter 6
 
+Chapter six deals mostly with concurrency.
+While this topic is just as important as other fundamentals such as Design Patterns, Data Structures and Alogrithms it would best serve the reader to 
+learn concurrency models that deal with their specific platform but if you have time Chapter six is very good so instead of summarizing chapter six here I will omit it and encourage you to read chapter six in the book. 
+
+# Chapter 7 
+
+  ### Listen to your lizard brain
+    - Instincts make you feel, not think and when you 'feel' something it is most likely the result of accumulated experience. Listen to it, but think. 
+    - 
 
 ### ...TO BE CONTINUED
