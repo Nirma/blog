@@ -288,6 +288,13 @@ learn concurrency models that deal with their specific platform but if you have 
     - 100% test coverage means nothing, just because every line of code is executed in the tests it does not mean all cases have been tested.
     - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
     
+   ### Names
+     - Name well; Rename when needed.
+     - If you can't come up with a good name for something, a name that makes sense then what you are trying to do has a high probability of also not making sense.
+     - Be consistent
+     - Follow common conventions of the language and programming environment you are using. 
+    
+    
   
  # Chapters 8 & 9 (There is a lot of overlap, it would be smoother to combine them here.)
  
@@ -306,6 +313,9 @@ David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 392). Pearson Education
    - One size fits no one well.
    
    ### Afterthoughts on testing
+     - The benefit of writing tests is the effect it has on writing the code it tests, therefore the same person who writes the code should also be responsible for the tests. 
+     - The disadvantage is that if the test and the code both have a wrong assumption about the underlaying logic then the issue will go undetected.
+     - Use property based testing to fill this gap.
      - State Coverage, not test coverage
      - Use propety based testing (i.e QuickCheck-ish testing libraries)
      - Property based testing lets the computer generate random values and test that a certain property holds true.
