@@ -313,13 +313,13 @@ David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 392). Pearson Education
    - One size fits no one well.
    
    ### Afterthoughts on testing
-     - The benefit of writing tests is the effect it has on writing the code it tests, therefore the same person who writes the code should also be responsible for the tests. 
-     - The disadvantage is that if the test and the code both have a wrong assumption about the underlaying logic then the issue will go undetected.
-     - Use property based testing to fill this gap.
-     - State Coverage, not test coverage
-     - Use propety based testing (i.e QuickCheck-ish testing libraries)
-     - Property based testing lets the computer generate random values and test that a certain property holds true.
-     - Property based testing is extremly economical, the alternative would be to write various tests to state by hand. 
+     * The benefit of writing tests is the effect it has on writing the code it tests, therefore the same person who writes the code should also be responsible for the tests. 
+     * The disadvantage is that if the test and the code both have a wrong assumption about the underlaying logic then the issue will go undetected.
+     * Use property based testing to fill this gap.
+     * State Coverage, not test coverage
+     * Use propety based testing (i.e QuickCheck-ish testing libraries)
+     * Property based testing lets the computer generate random values and test that a certain property holds true.
+     * Property based testing is extremly economical, the alternative would be to write various tests to state by hand. 
      
    
    
