@@ -944,8 +944,7 @@ learn concurrency models that deal with their specific platform but if you have 
    - Follow common conventions of the language and programming environment you are using. 
  
  
- 
- # Chapters 8 &amp; 9 (There is a lot of overlap, it would be smoother to combine them here.)
+ # Chapters 8 & 9 (lots of overlap)
  
  > "I’ve never met a human being who would want to read 17,000 pages of documentation, and if there was, I’d kill him to get him out of the gene pool. 
  >     - Joseph  Costello, President of Cadence
