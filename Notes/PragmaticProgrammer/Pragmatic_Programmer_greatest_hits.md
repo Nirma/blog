@@ -935,7 +935,7 @@ learn concurrency models that deal with their specific platform but if you have 
  - Even if you do not write tests thinking of how to make the code you are writing testable has the benefit of making the software you are writing modular and keeps you off the path of writing large monolithic functions. 
  - Unit tests are always the first line of defense, making sure that code contained in a module behaves as expected needs to be done and pass before testing code that relies on the module, fail fast, fail early. 
  - 100% test coverage means nothing, just because every line of code is executed in the tests it does not mean all cases have been tested.
-    - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
+ - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
     
  ### Names
    - Name well; Rename when needed.
@@ -948,7 +948,7 @@ learn concurrency models that deal with their specific platform but if you have 
  # Chapters 8 &amp; 9 (There is a lot of overlap, it would be smoother to combine them here.)
  
  > "I’ve never met a human being who would want to read 17,000 pages of documentation, and if there was, I’d kill him to get him out of the gene pool. 
- >     - Joseph  Costello, President of Cadence"
+ >     - Joseph  Costello, President of Cadence
 
  
  ### Agile is not a noun, it is how you do things
@@ -968,6 +968,4 @@ learn concurrency models that deal with their specific platform but if you have 
  - Use property based testing (i.e QuickCheck-ish testing libraries)
  - Property based testing lets the computer generate random values and test that a certain property holds true.
  - Property based testing is extremely economical, the alternative would be to write various tests to state by hand. 
- 
- 
  
