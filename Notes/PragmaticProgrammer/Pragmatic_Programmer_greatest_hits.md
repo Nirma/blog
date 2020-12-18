@@ -938,20 +938,18 @@ learn concurrency models that deal with their specific platform but if you have 
     - Don't become enslaved by TDD, TDD can help but also can be overdone and get in the way of software development.
     
  ### Names
- - Name well; Rename when needed.
-     - If you can't come up with a good name for something, a name that makes sense then what you are trying to do has a high probability of also not making sense.
-     - Be consistent
- - Follow common conventions of the language and programming environment you are using. 
+   - Name well; Rename when needed.
+   - If you can't come up with a good name for something, a name that makes sense then what you are trying to do has a high probability of also not making sense.
+   - Be consistent
+   - Follow common conventions of the language and programming environment you are using. 
  
  
  
  # Chapters 8 &amp; 9 (There is a lot of overlap, it would be smoother to combine them here.)
  
- “`
- "I’ve never met a human being who would want to read 17,000 pages of documentation, and if there was, I’d kill him to get him out of the gene pool. Joseph Costello, President of Cadence"
+ > "I’ve never met a human being who would want to read 17,000 pages of documentation, and if there was, I’d kill him to get him out of the gene pool. 
+ >     - Joseph  Costello, President of Cadence"
 
-David, Thomas; Hunt Andrew. The Pragmatic Programmer (p. 392). Pearson Education. Kindle Edition. 
-“`
  
  ### Agile is not a noun, it is how you do things
  - Agile is a method of responding to change and doing so frequently. 
